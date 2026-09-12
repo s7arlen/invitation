@@ -1,0 +1,222 @@
+/* ============================================================
+   GLOBAL STYLES — CINEMATIC LETTER REVEAL
+   ============================================================ */
+
+@import "./variables.css";
+@import "./typography.css";
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--ivory);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Paper grain texture overlay — very subtle, subconscious paper feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-top);
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Invitation container — keeps content narrow on desktop */
+.invitation-container {
+  width: 100%;
+  max-width: var(--invitation-max-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Section base */
+.section {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ornamental divider */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--champagne),
+    transparent
+  );
+}
+
+.ornamental-divider span {
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  color: var(--champagne);
+  letter-spacing: 0.2em;
+}
+
+/* Floral corner decorations */
+.floral-corner {
+  position: absolute;
+  pointer-events: none;
+  z-index: var(--z-above);
+}
+
+.floral-corner--tl {
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+
+.floral-corner--tr {
+  top: 0;
+  right: 0;
+  transform-origin: top right;
+  transform: scaleX(-1);
+}
+
+.floral-corner--bl {
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom left;
+  transform: scaleY(-1);
+}
+
+.floral-corner--br {
+  bottom: 0;
+  right: 0;
+  transform-origin: bottom right;
+  transform: scale(-1, -1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--champagne);
+  border-radius: 2px;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--dusty-rose);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .petal,
+  .floating-element {
+    display: none !important;
+  }
+}
+
+/* Placeholder photo style */
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--blush) 0%,
+    var(--soft-pink) 40%,
+    var(--champagne-light) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-placeholder::after {
+  content: "♡";
+  font-size: 2rem;
+  color: var(--dusty-rose);
+  opacity: 0.4;
+}
+
+/* Desktop centering experience */
+@media (min-width: 600px) {
+  body {
+    background: linear-gradient(
+      135deg,
+      var(--ivory-dark) 0%,
+      var(--ivory) 50%,
+      var(--ivory-dark) 100%
+    );
+  }
+}
