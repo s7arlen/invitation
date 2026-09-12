@@ -16,7 +16,7 @@ export default function LetterReveal() {
   useEffect(() => {
     const timer = setTimeout(() => {
       playHeroReveal({ containerRef, linesRef, namesRef, dateRef, scrollIndicatorRef });
-    }, 300);
+    }, 50);
     return () => clearTimeout(timer);
   }, []);
 

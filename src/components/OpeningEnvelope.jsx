@@ -59,7 +59,7 @@ export default function OpeningEnvelope({ onOpen }) {
         backgroundRef,
       },
       () => {
-        setTimeout(onOpen, 600);
+        setTimeout(onOpen, 50);
       }
     );
   };
